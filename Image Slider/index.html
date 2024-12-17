@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="slider-container">
+      <div class="slider-images">
+        <div class="slider-img">
+          <img src="Images/image-1.jpg" alt="1" />
+          <div class="details">
+            <h2>Zebra</h2>
+            <p>Pundamilia</p>
+          </div>
+        </div>
+        <div class="slider-img">
+          <img src="Images/image-2.jpg" alt="2" />
+          <div class="details">
+            <h2>Antelope</h2>
+            <p>Swala</p>
+          </div>
+        </div>
+        <div class="slider-img">
+          <img src="Images/image-3.jpg" alt="3" />
+          <div class="details">
+            <h2>Parrot</h2>
+            <p>Kasuku</p>
+          </div>
+        </div>
+        <div class="slider-img active">
+          <img src="Images/image-4.jpg" alt="4" />
+          <div class="details">
+            <h2>Leopard</h2>
+            <p>Chui</p>
+          </div>
+        </div>
+        <div class="slider-img">
+          <img src="Images/image-5.jpg" alt="5" />
+          <div class="details">
+            <h2>FRog</h2>
+            <p>Chura</p>
+          </div>
+        </div>
+        <div class="slider-img">
+          <img src="Images/image-6.jpg" alt="6" />
+          <div class="details">
+            <h2>Giraffe</h2>
+            <p>Twiga</p>
+          </div>
+        </div>
+        <div class="slider-img">
+          <img src="Images/image-7.jpg" alt="7" />
+          <div class="details">
+            <h2>Chameleon</h2>
+            <p>Kinyonga</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/jQuery.js"></script>
+    <script>
+      jQuery(document).ready(function ($) {
+        let currentIndex = 0; // Tracks the active index
+        const slides = $(".slider-img"); // All slides
+        const totalSlides = slides.length;
+
+        function autoSlide() {
+          slides.removeClass("active"); // Remove active class from all slides
+          currentIndex = (currentIndex + 1) % totalSlides; // Move to the next slide
+          slides.eq(currentIndex).addClass("active"); // Add active class to the current slide
+        }
+
+        // Auto-slide every 3 seconds
+        setInterval(autoSlide, 3000);
+      });
+    </script>
+  </body>
+</html>

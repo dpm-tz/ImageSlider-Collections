@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Image Slideshow</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ecf0f1; /* Light gray background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slideshow-container {
+      width: 100%;
+      max-width: 700px; /* Set a max width for the container */
+      height: 400px; /* Set the height of the slideshow */
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px; /* Rounded corners for the container */
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Light shadow around the slideshow */
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 1s ease-in-out; /* Smooth slide transition */
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure images fill the container without distortion */
+      border-radius: 8px; /* Rounded corners for images */
+    }
+
+    /* Caption styling (optional) */
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: #fff;
+      font-size: 24px;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slideshow-container">
+    <div class="slides">
+      <div class="slide">
+        <img src="images/image1.jpg" alt="Image 1">
+        <div class="caption">Image 1 Description</div>
+      </div>
+      <div class="slide">
+        <img src="images/image2.jpg" alt="Image 2">
+        <div class="caption">Image 2 Description</div>
+      </div>
+      <div class="slide">
+        <img src="images/image3.jpg" alt="Image 3">
+        <div class="caption">Image 3 Description</div>
+      </div>
+      <div class="slide">
+        <img src="images/image4.jpg" alt="Image 4">
+        <div class="caption">Image 4 Description</div>
+      </div>
+      <div class="slide">
+        <img src="images/image5.jpg" alt="Image 5">
+        <div class="caption">Image 5 Description</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+
+    function showSlides() {
+      const slides = document.querySelector('.slides');
+      const totalSlides = document.querySelectorAll('.slide').length;
+
+      // Move to the next slide
+      slideIndex++;
+      if (slideIndex >= totalSlides) {
+        slideIndex = 0; // Loop back to the first slide
+      }
+
+      // Change the slide by adjusting the transform property to slide horizontally
+      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+
+      // Set the time interval for the next slide
+      setTimeout(showSlides, 4000); // Change slide every 4 seconds
+    }
+
+    // Initialize slideshow when the page loads
+    window.onload = showSlides;
+  </script>
+
+</body>
+</html>

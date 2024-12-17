@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rotating Image Slider</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 50px auto; /* Centered with additional top margin */
+            overflow: hidden;
+            perspective: 1200px; /* Enhanced 3D effect */
+            border-radius: 20px; /* Slightly larger rounded corners */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow effect */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .slider img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slider img:hover {
+            transform: scale(1.1); /* Slightly larger zoom on hover */
+        }
+
+        .navigation-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+            transform: translateY(-50%);
+        }
+
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 20px;
+            border: none;
+            font-size: 25px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .dots-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        @media (max-width: 768px) {
+            .slider-container {
+                max-width: 95%;
+            }
+
+            .prev, .next {
+                padding: 15px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-container {
+                max-width: 100%;
+            }
+
+            .prev, .next {
+                padding: 12px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <div class="slider">
+            <img src="images/image1.jpg" alt="Image 1">
+            <img src="images/image2.jpg" alt="Image 2">
+            <img src="images/image3.jpg" alt="Image 3">
+            <img src="images/image4.jpg" alt="Image 4">
+            <img src="images/image5.jpg" alt="Image 5">
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
+
+        <!-- Dot Navigation -->
+        <div class="dots-container">
+            <span class="dot" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
+            <span class="dot" onclick="goToSlide(4)"></span>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slider img');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            if (index >= slides.length) {
+                slideIndex = 0;
+            }
+            if (index < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            const angle = -slideIndex * 72;  // 360/5 (since there are 5 images)
+            document.querySelector('.slider').style.transform = `rotateY(${angle}deg)`;
+
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.remove('active');
+                if (i === slideIndex) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+
+        function goToSlide(index) {
+            slideIndex = index;
+            showSlide(slideIndex);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(slideIndex);
+            setInterval(nextSlide, 4000); // Change image every 4 seconds
+        });
+    </script>
+
+</body>
+</html>

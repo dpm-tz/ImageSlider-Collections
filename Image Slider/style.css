@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+}
+
+.slider-container {
+  width: 100%;
+  height: 100vh;
+  background-image: url('Images/bg-img.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slider-images {
+  display: flex;
+  align-items: center;
+  gap: 2vw; /* Dynamic gap */
+}
+
+.slider-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.slider-img {
+  width: 10%; /* Dynamic width */
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.7s ease;
+}
+
+.slider-images .slider-img:first-child,
+.slider-images .slider-img:last-child {
+  height: 40vh; /* Height adapts to viewport */
+}
+
+.slider-images .slider-img:nth-child(2),
+.slider-images .slider-img:nth-child(6) {
+  height: 50vh;
+}
+
+.slider-images .slider-img:nth-child(3),
+.slider-images .slider-img:nth-child(4),
+.slider-images .slider-img:nth-child(5) {
+  height: 60vh;
+}
+
+h1 {
+  font-size: 3vw; /* Responsive font size */
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  transform: rotate(270deg);
+  transition: 0.7s ease;
+}
+
+.details {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+}
+
+.details h2 {
+  font-size: 2vw;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  transition: 0.7s ease;
+  display: none;
+}
+
+.details p {
+  font-size: 1.5vw;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  transition: 0.7s ease;
+  display: none;
+}
+
+.slider-img.active {
+  width: 50vw !important; /* Responsive active image size */
+  height: 70vh !important;
+}
+
+.slider-img.active h1 {
+  display: none;
+}
+
+.slider-img.active .details p,
+.slider-img.active .details h2 {
+  display: block;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .slider-img {
+    width: 15%; /* Adjust width for tablets */
+  }
+
+  .slider-img.active {
+    width: 60vw !important;
+    height: 60vh !important;
+  }
+
+  h1 {
+    font-size: 4vw;
+  }
+
+  .details h2 {
+    font-size: 3vw;
+  }
+
+  .details p {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-images {
+    gap: 1.5vw; /* Reduce gap for smaller screens */
+  }
+
+  .slider-img {
+    width: 20%; /* Adjust for smaller screens */
+  }
+
+  .slider-img.active {
+    width: 70vw !important;
+    height: 50vh !important;
+  }
+
+  h1 {
+    font-size: 5vw;
+  }
+
+  .details h2 {
+    font-size: 4vw;
+  }
+
+  .details p {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-images {
+    gap: 1vw;
+  }
+
+  .slider-img {
+    width: 25%; /* Adjust for mobile */
+  }
+
+  .slider-img.active {
+    width: 80vw !important;
+    height: 40vh !important;
+  }
+
+  h1 {
+    font-size: 6vw;
+    left: -5%;
+  }
+
+  .details h2 {
+    font-size: 5vw;
+  }
+
+  .details p {
+    font-size: 4vw;
+  }
+}
